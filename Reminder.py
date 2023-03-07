@@ -40,7 +40,7 @@ while Startpunkt:
             icon_path = "health.ico",
             threaded = True,
         )
-        print(f"Counter beendet nach: {counter_til_stop} Stunden!")
+        break
 
     elif counter_til_stop == 0:
         new_start = int(start_hour) + 1
@@ -53,7 +53,6 @@ while Startpunkt:
             threaded = True,
             )
             counter_til_stop = counter_til_stop + 1
-            print(f"Der Timer für die Pausen geht jetzt los! Nächste Pause um 0{new_start}:{start_minute}. ({counter_til_stop})")
         
         else:
             toast.show_toast(
@@ -64,8 +63,7 @@ while Startpunkt:
             threaded = True,
             )
             counter_til_stop = counter_til_stop + 1
-            print(f"Der Timer für die Pausen geht jetzt los! Nächste Pause um {new_start}:{start_minute}. ({counter_til_stop})")
-        time.sleep(1)
+        time.sleep(3600)
 
     else:
         new_start = int(new_start) + 1
@@ -89,5 +87,4 @@ while Startpunkt:
             threaded = True,
             )
             counter_til_stop = counter_til_stop + 1
-            print(f"Du solltest kurz aufstehen und eine Pause machen! Nächste Pause um {new_start}:{start_minute}. ({counter_til_stop})")
-        time.sleep(1)
+        time.sleep(3600)
