@@ -62,12 +62,10 @@ while Startpunkt:
         print(f"Counter beendet nach: {counter_til_stop} Stunden!")
         if not os.path.exists(path):
             with open(path_to_file, "a")as file:
-                file.write(f"\n({new_start}:{start_minute}), Counter beendet nach: {counter_til_stop} Stunden!")
-                file.write("\n ")
+                file.write(f"\n({new_start}:{start_minute}), Counter beendet nach: {counter_til_stop} Stunden!\n")
         else:
             with open(path_to_file, "a")as file:
-                file.write(f"\n({new_start}:{start_minute}), Counter beendet nach: {counter_til_stop} Stunden!")
-                file.write("\n ")
+                file.write(f"\n({new_start}:{start_minute}), Counter beendet nach: {counter_til_stop} Stunden!\n")
         
 
     elif counter_til_stop == 0:
@@ -84,10 +82,10 @@ while Startpunkt:
             counter_til_stop = counter_til_stop + 1
             if not os.path.exists(path):
                 with open(path_to_file, "a")as file:
-                    file.write(f"({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}. Counter: {counter_til_stop}")
+                    file.write(f"\n({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}. Counter: {counter_til_stop}")
             else:
                 with open(path_to_file, "a")as file:
-                    file.write(f"({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}. Counter: {counter_til_stop}")
+                    file.write(f"\n({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}. Counter: {counter_til_stop}")
             countdown(int(t))
         
         else:
