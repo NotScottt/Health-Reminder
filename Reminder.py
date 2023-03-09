@@ -48,7 +48,7 @@ else:
     start_hour = f"{current_date.hour}"
     start_minute = f"{current_date.minute} Uhr"
 
-t = 3600
+t = 0.1
 
 while Startpunkt:
     if counter_til_stop == 8 or current_date.hour == 16:
@@ -149,3 +149,5 @@ while Startpunkt:
                 with open(path_to_file, "a")as file:
                     file.write(f"\n({new_time}:{start_minute}), Stop! Nächste Pause um {new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
         countdown(int(t))
+
+        print("All done")
