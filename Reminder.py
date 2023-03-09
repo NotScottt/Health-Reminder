@@ -34,6 +34,7 @@ if len(str(current_date.hour)) == 1 and len(str(current_date.minute)) == 1:
     start_hour = f"0{current_date.hour}"
     start_minute = f"0{current_date.minute} Uhr"
 
+    
 
 elif len(str(current_date.hour)) == 2 and len(str(current_date.minute)) == 1:
     start_hour = f"{current_date.hour}"
