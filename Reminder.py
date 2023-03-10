@@ -68,7 +68,6 @@ while Startpunkt:
             with open(path_to_file, "a")as file:
                 file.write(f"\n({new_start}:{start_minute}), Counter beendet nach: {counter_til_stop} Stunden!\n")
         
-
     elif counter_til_stop == 0:
         new_start = int(start_hour) + 1
         
@@ -129,8 +128,7 @@ while Startpunkt:
                 with open(path_to_file, "a")as file:
                     file.write(f"\n({new_time}:{start_minute}), Stop! Nächste Pause um 0{new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
             countdown(int(t))
-        
-                   
+                  
         else:
             toast.show_toast(
             "Hinweis",
