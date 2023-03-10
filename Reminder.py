@@ -48,6 +48,17 @@ else:
     start_hour = f"{current_date.hour}"
     start_minute = f"{current_date.minute} Uhr"
 
+
+if len(str(current_date.day)) == 1 and len(str(current_date.month)) == 1:
+    current_date_updated = f"0{current_date.day}.0{current_date.month}."
+elif len(str(current_date.day)) == 1 and len(str(current_date.month)) == 2:
+    current_date_updated = f"0{current_date.day}.{current_date.month}."
+elif len(str(current_date.day)) == 2 and len(str(current_date.month)) == 1:
+    current_date_updated = f"{current_date.day}.0{current_date.month}."
+else:
+    current_date_updated = f"{current_date.day}.{current_date.month}."
+
+
 t = 3600
 
 while Startpunkt:
@@ -68,6 +79,7 @@ while Startpunkt:
             with open(path_to_file, "a")as file:
                 file.write(f"\n({new_start}:{start_minute}), Counter beendet nach: {counter_til_stop} Stunden!\n")
         
+
     elif counter_til_stop == 0:
         new_start = int(start_hour) + 1
         
@@ -80,12 +92,16 @@ while Startpunkt:
             threaded = True,
             )
             counter_til_stop = counter_til_stop + 1
-            if not os.path.exists(path):
+            if not os.path.exists(path_to_file):
                 with open(path_to_file, "a")as file:
-                    file.write(f"\n({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}. Counter: {counter_til_stop}")
+                    file.write(f"{current_date_updated} um ({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}.")
             else:
-                with open(path_to_file, "a")as file:
-                    file.write(f"\n({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}. Counter: {counter_til_stop}")
+                if os.stat(path_to_file).st_size == 0:
+                    with open(path_to_file, "a")as file:
+                        file.write(f"{current_date_updated} um ({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}.")
+                else:
+                    with open(path_to_file, "a")as file:
+                        file.write(f"\n\n{current_date_updated} um ({start_hour}:{start_minute}), Timer startet. Nächste Pause um 0{new_start}:{start_minute}.")
             countdown(int(t))
         
         else:
@@ -97,14 +113,19 @@ while Startpunkt:
             threaded = True,
             )
             counter_til_stop = counter_til_stop + 1
-            if not os.path.exists(path):
+            if not os.path.exists(path_to_file):
                 with open(path_to_file, "a")as file:
-                    file.write(f"\n({start_hour}:{start_minute}), Timer startet. Nächste Pause um {new_start}:{start_minute}.")
+                    file.write(f"{current_date_updated} um ({start_hour}:{start_minute}), Timer startet. Nächste Pause um {new_start}:{start_minute}.")
             else:
-                with open(path_to_file, "a")as file:
-                    file.write(f"\n({start_hour}:{start_minute}), Timer startet. Nächste Pause um {new_start}:{start_minute}.")
+                if os.stat(path_to_file).st_size == 0:
+                    with open(path_to_file, "a")as file:
+                        file.write(f"{current_date_updated} um ({start_hour}:{start_minute}), Timer startet. Nächste Pause um {new_start}:{start_minute}.")
+                else:
+                    with open(path_to_file, "a")as file:
+                        file.write(f"\n\n{current_date_updated} um ({start_hour}:{start_minute}), Timer startet. Nächste Pause um {new_start}:{start_minute}.")
+                   
         countdown(int(t))
-
+    
     else:
         new_start = int(new_start) + 1
         new_time = int(new_start) - 1
@@ -113,37 +134,46 @@ while Startpunkt:
         if len(str(new_start)) == 1:
             toast.show_toast(
             "Hinweis",
-            f"Du solltest kurz aufstehen und eine Pause machen! Nächste Pause um 0{new_start}:{start_minute}.",
+            f"Eine Stunde ist rum, 5 min Augenpause. Nächste Pause um 0{new_start}:{start_minute}.",
             duration = 20,
             icon_path = "health.ico",
             threaded = True,
             )
-            counter_til_stop = counter_til_stop + 1
-            counte_test = counter_til_stop - 1
-        
-            if not os.path.exists(path):
-                with open(path_to_file, "a")as file:
-                    file.write(f"\n({new_time}:{start_minute}), Stop! Nächste Pause um 0{new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
-            else:
-                with open(path_to_file, "a")as file:
-                    file.write(f"\n({new_time}:{start_minute}), Stop! Nächste Pause um 0{new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
-            countdown(int(t))
-                  
-        else:
-            toast.show_toast(
-            "Hinweis",
-            f"Du solltest kurz aufstehen und eine Pause machen! Nächste Pause um {new_start}:{start_minute}.",
-            duration = 20,
-            icon_path = "health.ico",
-            threaded = True,
-            )
+            print("5min ab jetzt")
+
             counter_til_stop = counter_til_stop + 1
             counte_test = counter_til_stop - 1
 
             if not os.path.exists(path):
                 with open(path_to_file, "a")as file:
-                    file.write(f"\n({new_time}:{start_minute}), Stop! Nächste Pause um {new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
+                    file.write(f"{current_date_updated} um ({new_time}:{start_minute}), Stop! 5 Min pause ab jetzt. Nächste Pause um 0{new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
             else:
                 with open(path_to_file, "a")as file:
-                    file.write(f"\n({new_time}:{start_minute}), Stop! Nächste Pause um {new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
+                    file.write(f"\n\n{current_date_updated} um ({new_time}:{start_minute}), Stop! 5 Min pause ab jetzt. Nächste Pause um 0{new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
+            countdown(int(300))
+
+            
+            countdown(int(t))
+        
+                   
+        else:
+            toast.show_toast(
+            "Hinweis",
+            f"Eine Stunde ist rum, 5 min Augenpause. Nächste Pause um 0{new_start}:{start_minute}.",
+            duration = 20,
+            icon_path = "health.ico",
+            threaded = True,
+            )
+            print("5min ab jetzt")
+            
+            counter_til_stop = counter_til_stop + 1
+            counte_test = counter_til_stop - 1
+
+            if not os.path.exists(path):
+                with open(path_to_file, "a")as file:
+                    file.write(f"{current_date_updated} um ({new_time}:{start_minute}), Stop! 5 Min pause ab jetzt. Nächste Pause um {new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
+            else:
+                with open(path_to_file, "a")as file:
+                    file.write(f"\n\n{current_date_updated} um ({new_time}:{start_minute}), Stop! 5 Min pause ab jetzt. Nächste Pause um {new_start}:{start_minute}. Lauf seit {counte_test} Stunde/n")
+            countdown(int(300))
         countdown(int(t))
