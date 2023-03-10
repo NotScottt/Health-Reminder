@@ -155,7 +155,6 @@ while Startpunkt:
             
             countdown(int(t))
         
-                   
         else:
             toast.show_toast(
             "Hinweis",
